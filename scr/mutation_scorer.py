@@ -6,7 +6,7 @@ from transformers import EsmTokenizer, EsmForMaskedLM
 import pandas as pd
 
 #Download the model 
-model_name = "facebook/esm2_t12_35M_UR50D"  # маленькая модель для теста
+model_name = "facebook/esm2_t12_35M_UR50D"  
 tokenizer = EsmTokenizer.from_pretrained(model_name)
 model = EsmForMaskedLM.from_pretrained(model_name)
 model.eval()
@@ -28,7 +28,7 @@ def compute_mutation_score(sequence, position, mutant_aa):
         outputs = model(**inputs)
         logits = outputs.logits
 
-    token_position = position + 1  # +1 из-за <cls>
+    token_position = position + 1  
     pos_logits = logits[0, token_position, :]
     log_probs = torch.log_softmax(pos_logits, dim=-1)
 
@@ -60,7 +60,7 @@ if __name__ == "__main__":
     print(f"Готово! Просканировано {len(df)} мутаций.")
 
     # Save that after when df was create 
-    df.to_csv("tp63_scores.csv", index=False)
+    df.to_csv("tp53_scores.csv", index=False)
     print("Сохранено в tp63_scores.csv")
 
     print("\nTop 10 most 'harmful' mutations:")
