@@ -5,7 +5,7 @@ import torch
 from transformers import EsmTokenizer, EsmForMaskedLM
 import pandas as pd
 
-# --- Загрузка модели ---
+#Download the model 
 model_name = "facebook/esm2_t12_35M_UR50D"  # маленькая модель для теста
 tokenizer = EsmTokenizer.from_pretrained(model_name)
 model = EsmForMaskedLM.from_pretrained(model_name)
@@ -51,20 +51,20 @@ def scan_all_mutations(sequence):
     return pd.DataFrame(results)
 
 
-# --- Тестовый запуск ---
+#Test 
 if __name__ == "__main__":
     tp53_full = "MMNFETSRCATLQYCPDPYIQRFVETPAHFSWKESYYRSTMSQSTQTNEFLSPEVFQHIWDFLEQPICSVQPIDLNFVDEPSEDGATNKIEISMDCIRMQDSDLSDPMWPQYTNLGLLNSMDQQIQNGSSSTSPYNTDHAQNSVTAPSPYAQPSSTFDALSPSPAIPSNTDYPGPHSFDVSFQQSSTAKSATWTYSTELKKLYCQIAKTCPIQIKVMTPPPQGAVIRAMPVYKKAEHVTEVVKRCPNHELSREFNEGQIAPPSHLIRVEGNSHAQYVEDPITGRQSVLVPYEPPQVGTEFTTVLYNFMCNSSCVGGMNRRPILIIVTLETRDGQVLGRRCFEARICACPGRDRKADEDSIRKQQVSDSTKNGDGTKRPFRQNTHGIQMTSIKKRRSPDDELLYLPVRGRETYEMLLKIKESLELMQYLPQHTIETYRQQQQQQHQHLLQKQTSIQSPSSYGNSSPPLNKMNSMNKLPSVSQLINPQQRNALTPTTIPDGMGANIPMMGTHMPMAGDMNGLSPTQALPPPLSMPSTSHCTPPPPYPTDCSIVSFLARLGCSSCLDYFTTQGLTTIYQIEHYSMDDLASLKIPEQFRHAIWKGILDHRQLHEFSSPSHLLRTPSSASTVSVGSSETRGERVIDAVRFTLRQTISFPPRDEWNDFNFDMDARRNKQQRIKEEGE"
 
-    print(f"Сканирую TP63 длиной {len(tp53_full)} а.к. ...")
+    print(f"Scanning  {len(tp53_full)} а.к. ...")
     df = scan_all_mutations(tp53_full)
     print(f"Готово! Просканировано {len(df)} мутаций.")
 
-    # Сохраняем ПОСЛЕ того, как df создан
+    # Save that after when df was create 
     df.to_csv("tp63_scores.csv", index=False)
     print("Сохранено в tp63_scores.csv")
 
-    print("\nТоп-10 самых 'вредных' мутаций:")
+    print("\nTop 10 most 'harmful' mutations:")
     print(df.nsmallest(10, "score").to_string(index=False))
 
-    print("\nТоп-10 самых 'нейтральных' мутаций:")
+    print("\nTop 10 most 'neutral' mutations:")
     print(df.iloc[(df["score"]).abs().argsort()[:10]].to_string(index=False))
