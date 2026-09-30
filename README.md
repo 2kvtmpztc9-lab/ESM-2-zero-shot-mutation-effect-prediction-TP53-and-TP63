@@ -19,7 +19,7 @@ on TP53 (0.877) and TP63 (0.875), despite TP63 having a much smaller benign set.
 For each position in the protein sequence, the residue is replaced with `<mask>`,
 and the model predicts probabilities for all 20 amino acids.
 
-**Negative score** it is mean substitution is unlikely given evolutionary context (potentially pathogenic).
+**Negative score** it is mean substitution is unlikely given evolutionary context (potentially pathogenic). \n
 **Score near zero** it is mean substitution is tolerated (likely benign).
 
 ## Pipeline
@@ -34,7 +34,23 @@ and the model predicts probabilities for all 20 amino acids.
 3. **Web app** (`src/app.py`):
    Streamlit interface with validation plot, heatmap, and top pathogenic mutations.
 
+## Usage
+
+```bash
+cd src
+
+# Score all missense mutations in TP53 (393 aa → 7,467 variants)
+python mutation_scorer.py
+
+# Validate against ClinVar variants
+python validate_650m.py     # TP53
+python validate_tp63.py     # TP63
+
+# Interactive web app
+streamlit run app.py
+```
+
 ## Key findings
 
-1. **Model size matters.** The small `t12_35M` model gives weak signal (R175H score ≈ −0.5),
+**Model size matters.** The small `t12_35M` model gives weak signal (R175H score ≈ −0.5),
    while `t33_650M` separates classes strongly (R175H score ≈ −6.0).
