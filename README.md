@@ -9,10 +9,7 @@ TP63 - epithelial development, stem cell function; it is not a tumor suppressor.
 The logic behind the test is as follows: if the method detects pathogenic mutations not only in the "well-studied" TP53 but also in its relative, it implies that the method relies on shared evolutionary principles rather than on the specific, idiosyncratic features of a single protein.
 
 ## TL;DR
-
-| Protein | N mutations | Mean score (pathogenic) | Mean score (benign) | Gap | ROC-AUC |
-
-The zero-shot approach transfers between homologs: ROC-AUC is nearly identical
+The zero-shot approach transfers between homologs, ROC-AUC is nearly identical
 on TP53 (0.877) and TP63 (0.875), despite TP63 having a much smaller benign set.
 
 ## Method
@@ -22,8 +19,8 @@ on TP53 (0.877) and TP63 (0.875), despite TP63 having a much smaller benign set.
 For each position in the protein sequence, the residue is replaced with `<mask>`,
 and the model predicts probabilities for all 20 amino acids.
 
-- **Negative score** → substitution is unlikely given evolutionary context (potentially pathogenic).
-- **Score near zero** → substitution is tolerated (likely benign).
+**Negative score** it is mean substitution is unlikely given evolutionary context (potentially pathogenic).
+**Score near zero** it is mean substitution is tolerated (likely benign).
 
 ## Pipeline
 
