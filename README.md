@@ -28,17 +28,14 @@ and the model predicts probabilities for all 20 amino acids.
 ## Pipeline
 
 1. **Full scan** (`src/mutation_scorer.py`):
-   - Scans all possible missense mutations in a protein.
-   - For TP53 (393 aa): 393 × 19 = **7,467 mutations**.
-   - Uses the smaller `esm2_t12_35M_UR50D` for speed.
+   Scans all possible missense mutations in a protein.
+   For TP53 (393 aa): 393 × 19 = 7,467 mutations uses the smaller `esm2_t12_35M_UR50D` for speed.
 
 2. **Validation** (`src/validate_650m.py`, `src/validate_tp63.py`):
-   - Scores curated ClinVar mutations (Pathogenic / Benign, unambiguous classification).
-   - Uses the larger `esm2_t33_650M_UR50D` for accuracy.
-   - Computes ROC-AUC.
+   Scores curated ClinVar mutations (Pathogenic / Benign, unambiguous classification). Uses the larger `esm2_t33_650M_UR50D` for accuracy. Computes ROC-AUC.
 
 3. **Web app** (`src/app.py`):
-   - Streamlit interface with validation plot, heatmap, and top pathogenic mutations.
+   Streamlit interface with validation plot, heatmap, and top pathogenic mutations.
 
 ## Key findings
 
