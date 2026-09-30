@@ -7,7 +7,7 @@ import plotly.express as px
 
 st.set_page_config(page_title="ESM 2: TP53 mutation effects", layout="wide")
 
-# --- Paths ---
+#Paths
 BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DATA = os.path.join(BASE, "data")
 
@@ -16,7 +16,7 @@ st.markdown("""
 Tool based on the protein language model **ESM-2** (Meta, 650M parameters).
 Method: **masked marginal scoring** - score = log P(mutant | context) - log P(wild type | context).
 
-**Negative score** → the model considers the substitution unlikely (potentially pathogenic).
+**Negative score**, it mean the model considers the substitution unlikely (potentially pathogenic).
 """)
 
 @st.cache_data
