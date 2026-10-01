@@ -8,7 +8,7 @@ TP53 - cell cycle control, apoptosis, tumor suppression.
 TP63 - epithelial development, stem cell function; it is not a tumor suppressor.
 The logic behind the test is as follows: if the method detects pathogenic mutations not only in the "well-studied" TP53 but also in its relative, it implies that the method relies on shared evolutionary principles rather than on the specific, idiosyncratic features of a single protein.
 
-## TL;DR
+## ABc
 The zero-shot approach transfers between homologs, ROC-AUC is nearly identical
 on TP53 (0.877) and TP63 (0.875), despite TP63 having a much smaller benign set.
 
